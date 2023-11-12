@@ -40,7 +40,6 @@ using (var scope = app.Services.CreateScope())
     {
         context.Database.Migrate();
     }
-    TestData.Seed(scope.ServiceProvider.GetRequiredService<DataContext>());
 } 
 
 app.Run();
