@@ -15,10 +15,10 @@
                 <th></th>
             </tr>
         </thead>
-
-        @foreach(var item in group.Models)
-        {
-             <tbody>
+        <tbody>
+            @foreach(var item in group.Models)
+            {
+            
                 <tr style="opacity:@(item.Active? "1" : "0.5")">
                     <th scope="row">@item.Id</th>
                     <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@item.Name</td>
@@ -28,8 +28,10 @@
                         <a class="btn btn-sm btn-danger ms-1" asp-controller="Model" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
-             </tbody>
-        }
+             
+            }
+        </tbody>
+        
     </table>
 }
 

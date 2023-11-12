@@ -16,9 +16,10 @@
             <th></th>
         </tr>
     </thead>
-    @foreach(var brand in Model)
-    {
-        <tbody>
+    <tbody>
+        @foreach(var brand in Model)
+        {
+        
                 <tr style="opacity:@(brand.Active ? "1" : "0.5")">
                     <th scope="row">@brand.Id</th>
                 <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><a asp-action="BrandModels" asp-route-id="@brand.Id">@brand.Name</a></td>
@@ -27,7 +28,9 @@
                         <a class="btn btn-sm btn-danger ms-1" asp-action="Delete" asp-route-id="@brand.Id">Delete</a>
                     </td>
                 </tr>
-        </tbody>
-    }
+        
+        }
+    </tbody>
+    
 </table>
     
