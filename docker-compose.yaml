@@ -1,0 +1,44 @@
+version: '3.9'
+
+networks:
+  asp-testing:
+    driver: bridge
+services:
+  app:
+    container_name: asp-net-test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - asp-testing
+    depends_on:
+      - db
+  db:
+    container_name: postgres_test
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: my_db
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - asp-testing
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.ru
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - asp-testing
+    depends_on:
+      - db
+volumes:
+  postgresql:

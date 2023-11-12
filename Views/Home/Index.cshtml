@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BRSK_Test.Data.Models.Brand>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach(var brand in Model)
+    {
+        <tbody>
+            <tr style="opacity:@(brand.Active ? "1" : "0.5")">
+                <th scope="row">@brand.Id</th>
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@brand.Name</td>
+                <td>
+                    <a class="btn btn-sm btn-primary ms-1" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger ms-1" asp-action="Delete" asp-route-id="@brand.Id">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+    

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BRSK_Test.Data.Models.ModelGroup.ModelGroup>
+
+@{
+    ViewData["Title"] = "Models";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@foreach (var group in Model)
+{
+    @if (group.Models.Count != 0)
+    {
+        <h4>@group.Brand.Name</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName(nameof(BRSK_Test.Data.Models.Model.Name))
+                    </th>
+                    <th>
+                        Operations
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in group.Models)
+                {
+                    <tr style="opacity:@(item.Active ? "1" : "0.5")">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary ms-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-danger ms-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+    
