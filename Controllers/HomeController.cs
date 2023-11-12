@@ -1,5 +1,6 @@
 ﻿using BRSK_Test.Data;
 using BRSK_Test.Data.Models;
+using BRSK_Test.Data.Models.ModelGroup;
 using BRSK_Test.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -120,6 +121,17 @@ namespace BRSK_Test.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult BrandModels(int id)
+        {
+            return View(_context.Brands.ToList().Select
+                       (brand => new ModelGroup
+                       {
+                           Brand = brand,
+                           Models = _context.Models.ToList().Where(model => model.Brand.Id == brand.Id).ToList()
+                       }).Where(brand => brand.Brand.Id == id).ToList()
+                       );
         }
 
         private bool BrandExists(int id)
