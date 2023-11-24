@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace BRSK_Test.Controllers
 {
-    public class HomeController : Controller
+    public class BrandController : Controller
     {
         private readonly DataContext _context;
 
-        public HomeController(DataContext context)
+        public BrandController(DataContext context)
         {
             _context = context;
         }

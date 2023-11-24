@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Редактирование</h1>
 
-<h4>Model</h4>
+<h4>Модель</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +20,7 @@
             <div class="form-group mt-1 me-1">
                 <label asp-for="Brand" class="control-label"></label>
                 <select class="form-control" asp-for="BrandId" asp-items="ViewBag.Brands">
-                    <option selected>Select brand</option>
+                    <option selected>Выберите марку</option>
                 </select>
                 <span asp-validation-for="BrandId" class="text-danger"></span>
             </div>
@@ -37,7 +37,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-sm btn-primary ms-1 mt-2">Назад</a>
 </div>
 
 @section Scripts {

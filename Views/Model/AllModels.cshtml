@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BRSK_Test.Data.Models.Model>
+
+@{
+    ViewData["Title"] = "All Models";
+    
+}
+
+<p>
+    <a class="btn btn-sm btn-primary ms-1" asp-action="Create">Добавить модель</a>
+</p>
+<select id="brandDropdown" class="form-select">
+    <option value="">Все марки</option>
+    <optgroup label="Марки">
+        @foreach (var group in ViewBag.groupedModels)
+            {
+                <option value="@group.Brand.Id">@group.Brand.Name</option>  
+            }
+    </optgroup>
+    
+</select>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var models in Model)
+        {
+                    <tr style="opacity:@(models.Active ? "1" : "0.5")">
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@models.Name</td>
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@models.BrandId</td>
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@models.Active</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary ms-1" asp-action="Edit" asp-route-id="@models.Id">Edit</a>
+                            <a class="btn btn-sm btn-danger ms-1" asp-action="Delete" asp-route-id="@models.Id">Delete</a>
+                        </td>
+                    </tr>
+
+        }
+    </tbody>
+    
+</table>
+<script>
+    document.getElementById('brandDropdown').addEventListener('change', function() {
+        var brandId = this.value;
+        localStorage.setItem('selectedBrand', brandId);
+        console.log(brandId)
+        window.location.href = '@Url.Action("AllModels", "Model")?brandId=' + brandId;
+    });
+    window.onload = function() {
+        var selectedBrand = localStorage.getItem('selectedBrand');
+        if (selectedBrand) {
+        document.getElementById('brandDropdown').value = selectedBrand;
+        }
+    };
+</script>
+
+
+
+

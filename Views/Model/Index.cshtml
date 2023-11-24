@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-sm btn-primary ms-1" asp-action="Create">Добавить модель</a>
 </p>
 
 @foreach (var group in Model)
@@ -19,8 +19,8 @@
                     <th>
                         @Html.DisplayName(nameof(BRSK_Test.Data.Models.Model.Name))
                     </th>
+                    <th>Active</th>
                     <th>
-                        Operations
                     </th>
                 </tr>
             </thead>
@@ -31,6 +31,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
+                                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">@item.Active</td>
                         <td>
                             <a class="btn btn-sm btn-primary ms-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                             <a class="btn btn-sm btn-danger ms-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>

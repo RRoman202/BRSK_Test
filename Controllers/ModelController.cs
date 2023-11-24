@@ -19,6 +19,23 @@ namespace BRSK_Test.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> AllModels(int? brandId)
+        {
+            ViewBag.groupedModels = _context.Brands.ToList().Select
+                        (brand => new ModelGroup
+                        {
+                            Brand = brand,
+                            Models = _context.Models.ToList().Where(model => model.Brand.Id == brand.Id).ToList()
+                        });
+                        
+            var models = await _context.Models.ToListAsync();
+            if (brandId != null)
+            {
+                models = models.Where(m => m.BrandId == brandId).ToList();
+            }
+            return View(models);
+        }
+
         public IActionResult Index()
         {
             if (_context.Models == null)
@@ -44,7 +61,8 @@ namespace BRSK_Test.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name, BrandId,Active")] Model model)
         {
-        
+            ViewBag.Brands = (await _context.Brands.ToListAsync())
+               .Select(i => new SelectListItem(i.Name, i.Id.ToString()));
             if (ModelState.IsValid)
             {
                 _context.Add(model);
