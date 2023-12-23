@@ -15,8 +15,7 @@ services:
       - asp-testing
     depends_on:
       - db
-    command: >
-        bash -c "dotnet ef database update && dotnet run"
+    
   db:
     container_name: postgres_test
     image: postgres
